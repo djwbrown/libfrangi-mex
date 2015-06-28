@@ -163,31 +163,38 @@ void frangi2d(const Mat &src, Mat &maxVals, Mat &whatScale, Mat &outAngles, fran
 }
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
+	// Create a pointer to opts struct.
 	frangi2d_opts_t *opts;
+	const mwSize *dims;
+
+	// // Allocate space for results if Matlab doesn't.
+	// if (nlhs < 3) {
+	// 	plhs[3]
+	// }
 
 	// Check the input arguments
 	if (nhrs < 1) {
-		mexPrintf("\nError");
+		mexPrintf("\nError. Too few input arguments.");
 	}
 	else if (nrhs < 2) {
 		frangi2d_createopts(opts);
 	}
 	else if (nrhs == 2) {
 		if (mxGetNumberOfElements(prhs[1]) ==  6) {
-			opts->sigma_start = // SIGMA_START
-			opts->sigma_end = // SIGMA_END
-        		opts->sigma_step = // SIGMA_STEP
-        		opts->BetaOne = // BETA_ONE
-        		opts->BetaTwo = // BETA_TWO
-			opts->BlackWhite = // BLACKWHITE
+			opts->sigma_start = mxGetData(prhs[1][0]) // SIGMA_START
+			opts->sigma_end = mxGetData(prhs[1][1]) // SIGMA_END
+        	opts->sigma_step = mxGetData(prhs[1][2]) // SIGMA_STEP
+        	opts->BetaOne = mxGetData(prhs[1][3]) // BETA_ONE
+        	opts->BetaTwo = mxGetData(prhs[1][4]) // BETA_TWO
+			opts->BlackWhite = mxGetData(prhs[1][5]) // BLACKWHITE
 		} else {
 			mexPrintf("\nError. Options argument must have exactly six elements.");
 		}
 	}
 	else if (nrhs > 2) {
-		mexPrintf("\nError");
+		mexPrintf("\nError. Too many input arguments.");
 	}
 
 	// Pass the image on to frangi2d
-	frangi2d(const Mat &src, Mat &maxVals, Mat &whatScale, Mat &outAngles, *opts)
+	frangi2d(prhs[0], plhs[0], plhs[1], plhs[2], *opts)
 }
