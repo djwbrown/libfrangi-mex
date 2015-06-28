@@ -1,5 +1,5 @@
 #include <opencv2/opencv.hpp>
-
+#include <mex.h>
 
 //options for the filter
 typedef struct{
@@ -28,9 +28,11 @@ typedef struct{
 //Frangi filter//
 /////////////////
 
+// Entry point for Matlab
+void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
+
 //apply full Frangi filter to src. Vesselness is saved in J, scale is saved to scale, vessel angle is saved to directions. 
 void frangi2d(const cv::Mat &src, cv::Mat &J, cv::Mat &scale, cv::Mat &directions, frangi2d_opts_t opts);
-
 
 
 ////////////////////

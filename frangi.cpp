@@ -161,3 +161,33 @@ void frangi2d(const Mat &src, Mat &maxVals, Mat &whatScale, Mat &outAngles, fran
 		sigma += opts.sigma_step;
 	}
 }
+
+void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
+	frangi2d_opts_t *opts;
+
+	// Check the input arguments
+	if (nhrs < 1) {
+		mexPrintf("\nError");
+	}
+	else if (nrhs < 2) {
+		frangi2d_createopts(opts);
+	}
+	else if (nrhs == 2) {
+		if (mxGetNumberOfElements(prhs[1]) ==  6) {
+			opts->sigma_start = // SIGMA_START
+			opts->sigma_end = // SIGMA_END
+        		opts->sigma_step = // SIGMA_STEP
+        		opts->BetaOne = // BETA_ONE
+        		opts->BetaTwo = // BETA_TWO
+			opts->BlackWhite = // BLACKWHITE
+		} else {
+			mexPrintf("\nError. Options argument must have exactly six elements.");
+		}
+	}
+	else if (nrhs > 2) {
+		mexPrintf("\nError");
+	}
+
+	// Pass the image on to frangi2d
+	frangi2d(const Mat &src, Mat &maxVals, Mat &whatScale, Mat &outAngles, *opts)
+}
