@@ -7,6 +7,12 @@ in Proc. Med. Image. Comput. Assist. Interv. 1496, pp. 130–137 (1998)).
 
 This code is based on a MATLAB implementation found at [MATLAB Central](http://www.mathworks.com/matlabcentral/fileexchange/24409-hessian-based-frangi-vesselness-filter). 
 
+
+Matlab Compatibility with MEX
+-----------------------------
+This fork has been modified to allow calling from Matlab. Please find the original implementation at:
+https://ntnu-bioopt.github.io/software/libfrangi.html
+
 Basic usage
 -----------
 
